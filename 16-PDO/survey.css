@@ -1,0 +1,25 @@
+body{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+form{
+    background-color: #eee;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.option{
+    padding: 5px 0;
+}
+.bar{
+    background-color: rgb(152,196,236);
+    border-radius: 4px;
+    padding: 10px;
+}
+.selected{
+    background-color: rgb(33,90,143);
+    border-radius: 4px;
+    color: white;
+    padding: 10px;
+}
+
+
