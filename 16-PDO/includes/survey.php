@@ -27,10 +27,12 @@ class Survey extends DB{
     public function getTotalVotes(){
         $query = $this->connect()->query('SELECT SUM(votes) AS votos_totales FROM favourite_programing_language');
         $this->totalVotes = $query->fetch(PDO::FETCH_OBJ)->votos_totales;
+        // print_r($query);
+        // print_r($this->totalVotes);
         return $this->totalVotes;
     }
-    public function getPersentageVotes(){
-        
+    public function getPercentageVotes($votes){
+        return round(($votes/$this -> totalVotes)*100,1);
     }
 
 }
