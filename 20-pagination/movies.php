@@ -65,7 +65,7 @@ class Movies extends DB{
             }else{
                 $actual = "";
             }
-            echo "<li><a " . $actual . " href='#'>" . ($i+1) . "</a></li>";
+            echo "<li><a " . $actual . " href='?page= ". ($i+1) . "'>" . ($i+1) . "</a></li>";
         }
         echo "</ul>";
     }
