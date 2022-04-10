@@ -1,8 +1,14 @@
 <?php
-//Tercera capa de abstraccion: La api muestra el resultado de las consultas a la BD
+//Tercera capa de abstraccion: La api codifica la respuesta de la segunda capa a JSON
 include_once 'movie.php';
 
 class ApiMovies{
+    function error($message){
+        echo '<code>' . json_encode(array('message' => $message))  . '</code>';
+    }
+    function printJSON($array){
+        echo '<code>'. json_encode($array).'</code>';
+    }
     function getAll(){
         $movie = new Movie();
         $movies = array();
@@ -22,18 +28,37 @@ class ApiMovies{
                     'name' => $row['name'],
                     'poster' => $row['poster']
                 );
-                array_push($movies["items"], $item);
+                array_push($movies['items'], $item);
             }
             //retorno el Json de las movies, json_encode convierte a json el array
             //De peliculas.
-            echo json_encode($movies);
-
+            $this -> printJSON($movies);
         }else{
             //Como hacer un recorrido a un arreglo vacio daria un error, entonces
             //tenemos este else.
-            echo json_encode(array('message' => "There aren't elements registred"));
+            // echo json_encode(array('message' => "There aren't elements registred"));
+            $this -> error('No items registered');
             //json_encode permite parsear el argumento a formato JSON.
+        }
+    }
+    function getById($id){
+        $movie = new Movie();
+        $movies = array();
+        $movies["items"] = array();
 
+        $result = $movie->takeMovie($id);
+        
+        if($result->rowCount() == 1){
+            $row = $result->fetch();
+            $item = array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'poster' => $row['poster']
+            );
+            array_push($movies['items'], $item);
+            $this -> printJSON($movies);
+        }else{
+            $this -> error('No items registered');
         }
     }
 }
