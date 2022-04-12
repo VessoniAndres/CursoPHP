@@ -1,8 +1,9 @@
 <?php
 
-class main{
+class main extends Controller{
     function __construct(){
-        echo "<p>Nuevo controlador MAIN </p>";
+        parent::__construct();
+        $this->view->render('main/index');
     }
     function saludar(){
         echo '<p>aloha</p>';
